@@ -23,7 +23,7 @@ router
 .delete(deleteUser)
 
 //sset up add new freind to a user's friend list at /appi/users/:id/friends/:freindId
-router.route('/:id/freinds/freindId')
+router.route('/:id/friends/:friendId')
 .post(addFriend);
 
 module.exports = router;
