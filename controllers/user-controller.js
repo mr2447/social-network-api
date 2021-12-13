@@ -67,7 +67,31 @@ const userController = {
         })
         .catch(err => res.status(400).json(err))
         /*############BONUS: Remove a user's associated thoughts when deleted.*/
-    }
+    },
+    //add a new freind to this user's freind list
+    addFriend({ params, body}, res) {
+        console.log(body)
+        User.create(body)
+        .then(({_id})=> {
+            console.log(_id)
+            return User.findOneAndUpdate(
+                { _id: params.userId},
+                { $push: { body }},
+                { new: true, runValidators: true }
+            );
+        })
+        .then(dbUserData => {
+            if(!dbUserData) {
+                res.status(404).json({message: 'No pizza found with this id!'});
+                return;
+            }
+            res.json(dbPizzaData);
+        })
+        .catch(err=> {
+            console.log("Something went wrong")
+            res.json(err)
+        })
+    },
 
 
 }
