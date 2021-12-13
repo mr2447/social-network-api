@@ -70,27 +70,27 @@ const userController = {
     },
     //add a new freind to this user's freind list
     addFriend({ params, body}, res) {
+        // User.create(body)
         console.log(body)
-        User.create(body)
-        .then(({_id})=> {
-            console.log(_id)
-            return User.findOneAndUpdate(
-                { _id: params.userId},
-                { $push: { body }},
-                { new: true, runValidators: true }
-            );
-        })
-        .then(dbUserData => {
-            if(!dbUserData) {
-                res.status(404).json({message: 'No pizza found with this id!'});
-                return;
-            }
-            res.json(dbPizzaData);
-        })
-        .catch(err=> {
-            console.log("Something went wrong")
-            res.json(err)
-        })
+        // .then(({_id})=> {
+        //     console.log(_id)
+        //     return User.findOneAndUpdate(
+        //         { _id: params.friendId},
+        //         { $push: { friends: _id }},
+        //         { new: true, runValidators: true }
+        //     );
+        // })
+        // .then(dbUserData => {
+        //     if(!dbUserData) {
+        //         res.status(404).json({message: 'No user found with this id!'});
+        //         return;
+        //     }
+        //     res.json(dbPizzaData);
+        // })
+        // .catch(err=> {
+        //     console.log("Something went wrong")
+        //     res.json(err)
+        // })
     },
 
 
