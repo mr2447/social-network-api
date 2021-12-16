@@ -16,7 +16,7 @@
   run npm i
   ## Video Links!
   * https://youtu.be/Y7Bh5Czdd1c (part 1)
-  * https://youtu.be/-Yz_EMkrwiE(part 2)
+  * https://youtu.be/-Yz_EMkrwiE (part 2)
   * https://youtu.be/M-qNZ9U5xGQ (part 3)
   ## Credits 
   Marvin Ren https://github.com/mr2447/social-network-api
