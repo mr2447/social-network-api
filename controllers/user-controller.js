@@ -4,10 +4,18 @@ const userController = {
     //get all uers
     getAllUser(req, res) {
         User.find({})
-        .populate({
+        .populate(
+            {
             path: 'thoughts',
+            model: 'Thought',
             select: '-__v'
-        })
+            },
+            {
+            path: 'friends',
+            model: 'User',
+            select: '-__v'
+            }
+        )
         .select('-__v')
         .sort({_id: -1})
         .then(dbUserData => res.json(dbUserData))
@@ -70,8 +78,6 @@ const userController = {
     },
     //add a new freind to this user's freind list
     addFriend({ params, body}, res) {
-        // console.log(params, friendId)
-        //## how to findmany and update?
         User.findOneAndUpdate(
             {_id: params.id},
             {$push: {friends: params.friendId}},
@@ -83,19 +89,19 @@ const userController = {
                 res.status(404).json({message: 'No user found with this id'})
                 return;
             }
-            User.findOneAndUpdate(
-                {_id: params.friendId},
-                {$push: {friends: params.id}},
-                {new: true}
-            )
-            .then(dbFriendData => {
-                console.log(dbFriendData)
-                if(!dbFriendData) {
-                    res.status(404).json({message: 'No friend found with this id'});
-                    return;
-                }
-                return
-            })
+            // User.findOneAndUpdate(
+            //     {_id: params.friendId},
+            //     {$push: {friends: params.id}},
+            //     {new: true}
+            // )
+            // .then(dbFriendData => {
+            //     console.log(dbFriendData)
+            //     if(!dbFriendData) {
+            //         res.status(404).json({message: 'No friend found with this id'});
+            //         return;
+            //     }
+            //     return
+            // })
             return res.json(dbUserData);
         })
         .catch(err=> {
