@@ -38,7 +38,7 @@ const thoughtController = {
         })
         .catch(err => {
             console.log(err);
-            res.staus(400).json(err)
+            res.status(400).json(err)
         })
     },
     //add thought to user
