@@ -7,13 +7,13 @@ const userController = {
         .populate(
             {
             path: 'thoughts',
-            model: 'Thought',
-            select: '-__v'
-            },
+            select: '-__v',
+            }
+        )
+        .populate(
             {
-            path: 'friends',
-            model: 'User',
-            select: '-__v'
+                path: 'friends',
+                select: '-__v',
             }
         )
         .select('-__v')
@@ -27,10 +27,18 @@ const userController = {
     //get a single user by id
     getUserById({ params }, res) {
         User.findOne({_id: params.id})
-        .populate({
+        .populate(
+            {
             path: 'thoughts',
-            select: '-__v'
-        })
+            select: '-__v',
+            }
+        )
+        .populate(
+            {
+                path: 'friends',
+                select: '-__v',
+            }
+        )
         .select('-__v')
         .then(dbUserData => {
             //if no user is found, send 404
